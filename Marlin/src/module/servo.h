@@ -30,7 +30,7 @@
 
 #if HAS_SERVO_ANGLES
 
-  #if ENABLED(SWITCHING_EXTRUDER)
+  #if ENABLED(SWITCHING_EXTRUDER) && DISABLED(SWITCHING_EXTRUDER_MECHANICAL)
     // Switching extruder can have 2 or 4 angles
     #if EXTRUDERS > 3
       #define REQ_ANGLES 4

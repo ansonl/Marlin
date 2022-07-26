@@ -1234,33 +1234,42 @@ static_assert(Y_MAX_LENGTH >= Y_BED_SIZE, "Movement bounds (Y_MIN_POS, Y_MAX_POS
 #endif
 
 /**
- * Single Stepper Dual Extruder with switching servo
+ * Single Stepper Dual Extruder
  */
 #if ENABLED(SWITCHING_EXTRUDER)
-  #if NUM_SERVOS < 1
-    #error "SWITCHING_EXTRUDER requires NUM_SERVOS >= 1."
-  #elif SWITCHING_EXTRUDER_SERVO_NR == 0 && !PIN_EXISTS(SERVO0)
-    #error "SERVO0_PIN must be defined for your SWITCHING_EXTRUDER."
-  #elif SWITCHING_EXTRUDER_SERVO_NR == 1 && !PIN_EXISTS(SERVO1)
-    #error "SERVO1_PIN must be defined for your SWITCHING_EXTRUDER."
-  #elif SWITCHING_EXTRUDER_SERVO_NR == 2 && !PIN_EXISTS(SERVO2)
-    #error "SERVO2_PIN must be defined for your SWITCHING_EXTRUDER."
-  #elif SWITCHING_EXTRUDER_SERVO_NR == 3 && !PIN_EXISTS(SERVO3)
-    #error "SERVO3_PIN must be defined for your SWITCHING_EXTRUDER."
+  #if EXTRUDERS < 2
+    #error "SWITCHING_EXTRUDER require 2 or more EXTRUDERS"
   #endif
-  #if EXTRUDERS > 3
-    #if NUM_SERVOS < 2
-      #error "SWITCHING_EXTRUDER with 4 extruders requires NUM_SERVOS >= 2."
-    #elif SWITCHING_EXTRUDER_E23_SERVO_NR == 0 && !PIN_EXISTS(SERVO0)
+  #if ENABLED(SWITCHING_EXTRUDER_MECHANICAL)
+    // #if !ALL(EVENT_GCODE_TOOLCHANGE_T0, EVENT_GCODE_TOOLCHANGE_T1)  // how can we check for existing string define?
+    //   #error "SWITCHING_EXTRUDER_MECHANICAL require EVENT_GCODE_TOOLCHANGE_T0 and EVENT_GCODE_TOOLCHANGE_T1 "
+    // #endif
+  #else
+    #if NUM_SERVOS < 1
+      #error "SWITCHING_EXTRUDER requires NUM_SERVOS >= 1."
+    #elif SWITCHING_EXTRUDER_SERVO_NR == 0 && !PIN_EXISTS(SERVO0)
       #error "SERVO0_PIN must be defined for your SWITCHING_EXTRUDER."
-    #elif SWITCHING_EXTRUDER_E23_SERVO_NR == 1 && !PIN_EXISTS(SERVO1)
+    #elif SWITCHING_EXTRUDER_SERVO_NR == 1 && !PIN_EXISTS(SERVO1)
       #error "SERVO1_PIN must be defined for your SWITCHING_EXTRUDER."
-    #elif SWITCHING_EXTRUDER_E23_SERVO_NR == 2 && !PIN_EXISTS(SERVO2)
+    #elif SWITCHING_EXTRUDER_SERVO_NR == 2 && !PIN_EXISTS(SERVO2)
       #error "SERVO2_PIN must be defined for your SWITCHING_EXTRUDER."
-    #elif SWITCHING_EXTRUDER_E23_SERVO_NR == 3 && !PIN_EXISTS(SERVO3)
+    #elif SWITCHING_EXTRUDER_SERVO_NR == 3 && !PIN_EXISTS(SERVO3)
       #error "SERVO3_PIN must be defined for your SWITCHING_EXTRUDER."
-    #elif SWITCHING_EXTRUDER_E23_SERVO_NR == SWITCHING_EXTRUDER_SERVO_NR
-      #error "SWITCHING_EXTRUDER_E23_SERVO_NR should be a different extruder from SWITCHING_EXTRUDER_SERVO_NR."
+    #endif
+    #if EXTRUDERS > 3
+      #if NUM_SERVOS < 2
+        #error "SWITCHING_EXTRUDER with 4 extruders requires NUM_SERVOS >= 2."
+      #elif SWITCHING_EXTRUDER_E23_SERVO_NR == 0 && !PIN_EXISTS(SERVO0)
+        #error "SERVO0_PIN must be defined for your SWITCHING_EXTRUDER."
+      #elif SWITCHING_EXTRUDER_E23_SERVO_NR == 1 && !PIN_EXISTS(SERVO1)
+        #error "SERVO1_PIN must be defined for your SWITCHING_EXTRUDER."
+      #elif SWITCHING_EXTRUDER_E23_SERVO_NR == 2 && !PIN_EXISTS(SERVO2)
+        #error "SERVO2_PIN must be defined for your SWITCHING_EXTRUDER."
+      #elif SWITCHING_EXTRUDER_E23_SERVO_NR == 3 && !PIN_EXISTS(SERVO3)
+        #error "SERVO3_PIN must be defined for your SWITCHING_EXTRUDER."
+      #elif SWITCHING_EXTRUDER_E23_SERVO_NR == SWITCHING_EXTRUDER_SERVO_NR
+        #error "SWITCHING_EXTRUDER_E23_SERVO_NR should be a different extruder from SWITCHING_EXTRUDER_SERVO_NR."
+      #endif
     #endif
   #endif
 #endif

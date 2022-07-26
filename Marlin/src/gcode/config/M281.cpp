@@ -60,9 +60,11 @@ void GcodeSuite::M281_report(const bool forReplay/*=true*/) {
     switch (i) {
       default: break;
       #if ENABLED(SWITCHING_EXTRUDER)
-        case SWITCHING_EXTRUDER_SERVO_NR:
-        #if EXTRUDERS > 3
-          case SWITCHING_EXTRUDER_E23_SERVO_NR:
+        #if DISABLED(SWITCHING_EXTRUDER_MECHANICAL)
+          case SWITCHING_EXTRUDER_SERVO_NR:
+          #if EXTRUDERS > 3
+            case SWITCHING_EXTRUDER_E23_SERVO_NR:
+          #endif
         #endif
       #elif ENABLED(SWITCHING_NOZZLE)
         case SWITCHING_NOZZLE_SERVO_NR:
