@@ -1550,7 +1550,7 @@ void setup() {
       raise_nozzle(1);
     #else
       move_nozzle_servo(0);
-      #endif
+    #endif
   #endif
 
   #if ENABLED(PARKING_EXTRUDER)
