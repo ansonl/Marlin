@@ -2454,7 +2454,7 @@
   /**
    * Extra G-code to run while executing tool-change commands. Can be used to use an additional
    * stepper motor (e.g., I axis in Configuration.h) to drive the tool-changer.
-   * Requred for SWITCHING_EXTRUDER_MECHANICAL.
+   * Requred by  SWITCHING_EXTRUDER_MECHANICAL and SWITCHING_NOZZLE_MECHANICAL.
    */
   #define EVENT_GCODE_TOOLCHANGE_T0 "G1 X-20"       // Extra G-code to run while executing tool-change command T0
   #define EVENT_GCODE_TOOLCHANGE_T1 "G1 X220"       // Extra G-code to run while executing tool-change command T1

@@ -266,7 +266,7 @@
   #endif
 #endif
 
-// A dual-nozzle that uses a servomotor to raise/lower one (or both) of the nozzles
+// A dual-nozzle that uses a servomotor to raise/lower one (or both) of the nozzles, can be combined with SWITCHING_EXTRUDER
 #define SWITCHING_NOZZLE
 #if ENABLED(SWITCHING_NOZZLE)
   #define SWITCHING_NOZZLE_MECHANICAL   // Switch nozzles by bumping toolhead into gantry sides, require EVENT_GCODE_TOOLCHANGE_#
