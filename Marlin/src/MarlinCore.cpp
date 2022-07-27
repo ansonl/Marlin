@@ -1542,7 +1542,7 @@ void setup() {
     SETUP_RUN(move_extruder_servo(0));  // Initialize extruder servo
   #endif
 
-  #if ENABLED(SWITCHING_NOZZLE)
+  #if ENABLED(SWITCHING_NOZZLE) && DISABLED(SWITCHING_NOZZLE_MECHANICAL)
     SETUP_LOG("SWITCHING_NOZZLE");
     // Initialize nozzle servo(s)
     #if SWITCHING_NOZZLE_TWO_SERVOS
@@ -1550,7 +1550,7 @@ void setup() {
       raise_nozzle(1);
     #else
       move_nozzle_servo(0);
-    #endif
+      #endif
   #endif
 
   #if ENABLED(PARKING_EXTRUDER)
