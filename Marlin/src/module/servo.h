@@ -30,7 +30,7 @@
 
 #if HAS_SERVO_ANGLES
 
-  #if ENABLED(SWITCHING_EXTRUDER) && DISABLED(SWITCHING_EXTRUDER_MECHANICAL)
+  #if ENABLED(SWITCHING_EXTRUDER)
     // Switching extruder can have 2 or 4 angles
     #if EXTRUDERS > 3
       #define REQ_ANGLES 4
@@ -43,7 +43,7 @@
     constexpr uint16_t sase[4] = { 0 };
   #endif
 
-  #if ENABLED(SWITCHING_NOZZLE) && DISABLED(SWITCHING_NOZZLE_MECHANICAL)
+  #if ENABLED(SWITCHING_NOZZLE)
     constexpr uint16_t sasn[] = SWITCHING_NOZZLE_SERVO_ANGLES;
     static_assert(COUNT(sasn) == 2, "SWITCHING_NOZZLE_SERVO_ANGLES needs 2 angles.");
   #else

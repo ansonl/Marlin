@@ -665,7 +665,7 @@ inline void manage_inactivity(const bool no_stepper_sleep=false) {
       && ELAPSED(ms, gcode.previous_move_ms + SEC_TO_MS(EXTRUDER_RUNOUT_SECONDS))
       && !planner.has_blocks_queued()
     ) {
-      #if ENABLED(SWITCHING_EXTRUDER)
+      #if HAS_SWITCHING_EXTRUDER
         bool oldstatus;
         switch (active_extruder) {
           default: oldstatus = stepper.AXIS_IS_ENABLED(E_AXIS, 0); stepper.ENABLE_EXTRUDER(0); break;
@@ -679,7 +679,7 @@ inline void manage_inactivity(const bool no_stepper_sleep=false) {
             #endif // E_STEPPERS > 2
           #endif // E_STEPPERS > 1
         }
-      #else // !SWITCHING_EXTRUDER
+      #else // !HAS_SWITCHING_EXTRUDER
         bool oldstatus;
         switch (active_extruder) {
           default:
@@ -695,7 +695,7 @@ inline void manage_inactivity(const bool no_stepper_sleep=false) {
       planner.set_e_position_mm(olde);
       planner.synchronize();
 
-      #if ENABLED(SWITCHING_EXTRUDER)
+      #if HAS_SWITCHING_EXTRUDER
         switch (active_extruder) {
           default: if (oldstatus) stepper.ENABLE_EXTRUDER(0); else stepper.DISABLE_EXTRUDER(0); break;
           #if E_STEPPERS > 1
@@ -705,12 +705,12 @@ inline void manage_inactivity(const bool no_stepper_sleep=false) {
             #endif // E_STEPPERS > 2
           #endif // E_STEPPERS > 1
         }
-      #else // !SWITCHING_EXTRUDER
+      #else // !HAS_SWITCHING_EXTRUDER
         switch (active_extruder) {
           #define _CASE_RESTORE(N) case N: if (oldstatus) stepper.ENABLE_EXTRUDER(N); else stepper.DISABLE_EXTRUDER(N); break;
           REPEAT(E_STEPPERS, _CASE_RESTORE);
         }
-      #endif // !SWITCHING_EXTRUDER
+      #endif // !HAS_SWITCHING_EXTRUDER
 
       gcode.reset_stepper_timeout(ms);
     }
@@ -1542,7 +1542,7 @@ void setup() {
     SETUP_RUN(move_extruder_servo(0));  // Initialize extruder servo
   #endif
 
-  #if ENABLED(SWITCHING_NOZZLE) && DISABLED(SWITCHING_NOZZLE_MECHANICAL)
+  #if ENABLED(SWITCHING_NOZZLE)
     SETUP_LOG("SWITCHING_NOZZLE");
     // Initialize nozzle servo(s)
     #if SWITCHING_NOZZLE_TWO_SERVOS

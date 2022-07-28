@@ -59,12 +59,12 @@ void GcodeSuite::M281_report(const bool forReplay/*=true*/) {
   LOOP_L_N(i, NUM_SERVOS) {
     switch (i) {
       default: break;
-      #if ENABLED(SWITCHING_EXTRUDER) && DISABLED(SWITCHING_EXTRUDER_MECHANICAL)
+      #if ENABLED(SWITCHING_EXTRUDER)
         case SWITCHING_EXTRUDER_SERVO_NR:
         #if EXTRUDERS > 3
           case SWITCHING_EXTRUDER_E23_SERVO_NR:
         #endif
-      #elif ENABLED(SWITCHING_NOZZLE) && DISABLED(SWITCHING_NOZZLE_MECHANICAL)
+      #elif ENABLED(SWITCHING_NOZZLE)
         case SWITCHING_NOZZLE_SERVO_NR:
       #elif ENABLED(BLTOUCH) || (HAS_Z_SERVO_PROBE && defined(Z_SERVO_ANGLES))
         case Z_PROBE_SERVO_NR:

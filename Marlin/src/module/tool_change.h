@@ -74,7 +74,7 @@
   void move_extruder_servo(const uint8_t e);
 #endif
 
-#if ENABLED(SWITCHING_NOZZLE) && DISABLED(SWITCHING_NOZZLE_MECHANICAL)
+#if ENABLED(SWITCHING_NOZZLE)
   #if SWITCHING_NOZZLE_TWO_SERVOS
     void lower_nozzle(const uint8_t e);
     void raise_nozzle(const uint8_t e);
