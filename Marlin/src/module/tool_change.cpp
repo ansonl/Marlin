@@ -1271,7 +1271,7 @@ void tool_change(const uint8_t new_tool, bool no_move/*=false*/) {
         magnetic_switching_toolhead_tool_change(new_tool, no_move);
       #elif ENABLED(ELECTROMAGNETIC_SWITCHING_TOOLHEAD)                 // Magnetic Switching ToolChanger
         em_switching_toolhead_tool_change(new_tool, no_move);
-      #elif ENABLED(SWITCHING_NOZZLE) && !SWITCHING_NOZZLE_TWO_SERVOS     // Switching Nozzle (single servo)
+      #elif ENABLED(SWITCHING_NOZZLE) && !SWITCHING_NOZZLE_TWO_SERVOS   // Switching Nozzle (single servo)
         // Raise by a configured distance to avoid workpiece, except with
         // SWITCHING_NOZZLE_TWO_SERVOS, as both nozzles will lift instead.
         if (!no_move) {
