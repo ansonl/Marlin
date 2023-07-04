@@ -38,10 +38,20 @@
   #include "usb_flashdrive/Sd2Card_FlashDrive.h"
 #endif
 
+/*
 #if NEED_SD2CARD_SDIO
   #include "Sd2Card_sdio.h"
 #elif NEED_SD2CARD_SPI
   #include "Sd2Card.h"
+#endif
+*/
+
+#if NEED_SD2CARD_SDIO
+#include "Sd2Card_sdio.h"
+#endif
+
+#if NEED_SD2CARD_SPI
+#include "Sd2Card.h"
 #endif
 
 #include "SdFatConfig.h"

@@ -48,6 +48,7 @@
 // Misc. Functions
 //
 #define LED_PIN                             PA13
+#define CASE_LIGHT_PIN                      PD14
 
 //
 // Trinamic Stallguard pins
@@ -200,18 +201,41 @@
   #define E2_CS_PIN                         PE1
 #endif
 
-#define E3_STEP_PIN                         PE6   // MOTOR 7
-#define E3_DIR_PIN                          PA14
-#define E3_ENABLE_PIN                       PE0
-#ifndef E3_CS_PIN
-  #define E3_CS_PIN                         PD3
+//Define E3 or TEMP_SENSOR_1 on MOTOR 7
+#if TEMP_SENSOR_1 == -5
+  #define TEMP_1_CS_PIN                     PD3   // Max31865 CS MOTOR 7
+  #define TEMP_1_SCK_PIN                    PA5
+  #define TEMP_1_MISO_PIN                   PA6
+  #define TEMP_1_MOSI_PIN                   PA7
+  //#define SOFTWARE_SPI                            // Max31865 and LCD SD share a set of SPIs, Set SD to softwareSPI for Max31865
+  #define FORCE_SOFT_SPI
+
+  /*
+  #ifndef MAX31865_CS_PIN
+    #define MAX31865_MISO_PIN PA6
+    #define MAX31865_SCK_PIN PA5
+    #define MAX31865_MOSI_PIN PA7
+    #define MAX6675_SS_PIN PD3
+    //#define MAX31865_CS_PIN PD3
+  #endif
+  */
+#else
+  #define TEMP_1_PIN                        PF5   // TH1
+
+  //Define E3 if MOTOR 7 not used for TEMP_SENSOR_1 MAX module
+  #define E3_STEP_PIN                         PE6   // MOTOR 7
+  #define E3_DIR_PIN                          PA14
+  #define E3_ENABLE_PIN                       PE0
+  #ifndef E3_CS_PIN
+    #define E3_CS_PIN                         PD3
+  #endif
 #endif
 
 //
 // Temperature Sensors
 //
 #define TEMP_BED_PIN                        PF3   // TB
-#define TEMP_1_PIN                          PF5   // TH1
+//#define TEMP_1_PIN                          PF5   // TH1
 #define TEMP_2_PIN                          PF6   // TH2
 #define TEMP_3_PIN                          PF7   // TH3
 
@@ -225,11 +249,11 @@
 #define HEATER_3_PIN                        PB11  // Heater3
 
 #define FAN0_PIN                            PA8   // Fan0
-#define FAN1_PIN                            PE5   // Fan1
-#define FAN2_PIN                            PD12  // Fan2
-#define FAN3_PIN                            PD13  // Fan3
-#define FAN4_PIN                            PD14  // Fan4
-#define FAN5_PIN                            PD15  // Fan5
+//#define FAN1_PIN                            PE5   // Fan1 //Unused
+//#define FAN2_PIN                            PD12  // Fan2 //Unused
+//#define FAN3_PIN                            PD13  // Fan3 //Use for controller fan
+//#define FAN4_PIN                            PD14  // Fan4 //Use for Case light
+//#define FAN5_PIN                            PD15  // Fan5 //Use for E0/E1 heatsink cooling fan pin
 
 //
 // SD Support
